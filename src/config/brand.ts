@@ -3,7 +3,7 @@
 // and every explorer link derive from it. Anything that is not a 0x + 40 hex address is treated as "not launched yet".
 
 /** Contract address of $REXSON on Robinhood Chain. "TBA" until the token exists. */
-const CA: string = "TBA";
+const CA: string = "0xbca7db87e693a90c22824912d8e7fc9c5de60356";
 
 /**
  * True once the domain points at this deployment. While false, the production *.vercel.app host is served as is (kept
