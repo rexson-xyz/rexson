@@ -41,7 +41,7 @@ export const BRAND = {
   description: `${NAME} keeps one versioned source of project facts for every AI assistant you use. You write a fact with its source, a reviewer approves it, and each assistant gets its own access key scoped to the fact groups you choose. Assistants read the current approved version over a plain HTTP API, and every read leaves a receipt: who read which version, and when. The approved versions and the grants can be anchored on Robinhood Chain as a public change log; the fact text never goes on chain.`,
   x: `https://x.com/${X_HANDLE}`,
   xHandle: `@${X_HANDLE}`,
-  // Public source repository: none yet, so the link stays hidden.
+  // Public source repository (owned by the project account since 26 Nov 2026).
   github: "https://github.com/rexson-xyz/rexson",
   ca: CA,
 } as const;
