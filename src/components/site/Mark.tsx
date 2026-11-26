@@ -1,19 +1,37 @@
 /*
- * Rexson's mark (AI placeholder until the owner's logo arrives; referensi/tools/apply-owner-assets.mjs swaps the files): an "R" drawn
- * on a 5 x 7 dot matrix, with one accent dot, in the LED language of the site. Inline SVG so it follows currentColor.
+ * Rexson's mark: the owner's dot-matrix "R", split by referensi/tools/apply-owner-assets.mjs into two alpha layers. The dots are a
+ * CSS mask in currentColor and the accent dots a mask in var(--accent), so the mark reads on the light paper and the dark ink.
  */
-const R_DOTS = ["11110", "10001", "10001", "11110", "10100", "10010", "10001"];
+import type { CSSProperties } from "react";
+
+const BASE_URL = "url(/brand/mark.webp?v=76cc58c5)";
+const ACCENT_URL = "url(/brand/mark-accent.webp?v=e3f053a6)";
+
+const layer = (url: string, color: string): CSSProperties => ({
+  position: "absolute",
+  inset: 0,
+  backgroundColor: color,
+  WebkitMaskImage: url,
+  maskImage: url,
+  WebkitMaskRepeat: "no-repeat",
+  maskRepeat: "no-repeat",
+  WebkitMaskPosition: "center",
+  maskPosition: "center",
+  WebkitMaskSize: "contain",
+  maskSize: "contain",
+});
 
 export function MarkGlyph({ size = 22, className = "", accent = true }: { size?: number; className?: string; accent?: boolean }) {
-  const dots: [number, number][] = [];
-  R_DOTS.forEach((row, y) => [...row].forEach((c, x) => c === "1" && dots.push([x, y])));
   return (
-    <svg aria-hidden="true" data-testid="brand-mark" className={`mk shrink-0 ${className}`} width={size} height={size} viewBox="-0.5 -0.5 7 8">
-      {dots.map(([x, y]) => (
-        <circle key={`${x}-${y}`} cx={x + 0.5} cy={y + 0.5} r={0.36} fill="currentColor" />
-      ))}
-      {accent ? <circle cx={5.85} cy={0.5} r={0.5} fill="var(--accent)" /> : null}
-    </svg>
+    <span
+      aria-hidden="true"
+      data-testid="brand-mark"
+      className={`mk shrink-0 ${className}`}
+      style={{ position: "relative", display: "inline-block", width: size, height: size }}
+    >
+      <span style={layer(BASE_URL, "currentColor")} />
+      <span style={layer(ACCENT_URL, accent ? "var(--accent)" : "currentColor")} />
+    </span>
   );
 }
 

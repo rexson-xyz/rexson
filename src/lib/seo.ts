@@ -37,7 +37,7 @@ export function pageMeta({
 }
 
 /** Share image version (sha8 of the file, written by referensi/tools/make-assets.mjs) and its description. */
-export const OG_V = "fd5e9208";
+export const OG_V = "f97a1eb2";
 export const OG_ALT = `${BRAND.name}: a dot-matrix fact card lit by an orange beam on black, with the line Approved memory for AI assistants.`;
 
 export type Crumb = { name: string; path: string };

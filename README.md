@@ -10,7 +10,7 @@ This repository is the working code behind https://rexson.xyz.
 
 - **What runs today:** facts with sources and versions, drafts, all-or-nothing batch approval, stale-draft detection, retire and delete; assistant keys scoped to fact groups, a level and an expiry; the read API (`GET /api/facts` as JSON or plain text, and a read-only JSON-RPC tool at `POST /api/mcp`); read receipts without fact text. A practice workspace runs in the browser on sample data with no wallet; a hosted project needs one free wallet signature.
 - **Live data:** the latest Robinhood Chain block, gas price and the Chainlink ETH/USD feed, read through the site's own relay; the ledger page reads the contract's events from chain logs.
-- **The contract:** `RexsonFactLedger` records hashes only (approved content hashes, grant scopes per assistant key hash, receipt Merkle roots) as a public change log. It is **not deployed yet**. When a grant is issued on chain, the server checks it with `checkReads` before every read and refuses the read if the chain says no.
+- **The contract:** `RexsonFactLedger` records hashes only (approved content hashes, grant scopes per assistant key hash, receipt Merkle roots) as a public change log. It is live on Robinhood Chain at `0x1b9ecaaa58e28e2a9f3edd2175c649b844a232ce` (verified on Blockscout). When a grant is issued on chain, the server checks it with `checkReads` before every read and refuses the read if the chain says no.
 - **Planned, not built:** several editors and reviewers in one hosted project (the contract already has the roles), more than one project per wallet, and token features for $REXSON.
 - **What nothing here claims:** Rexson does not make an assistant correct and cannot reach copies of a fact you pasted elsewhere. The server operator can read hosted facts; do not store secrets. $REXSON has no promised value. Not affiliated with Robinhood.
 
@@ -18,7 +18,7 @@ This repository is the working code behind https://rexson.xyz.
 
 | Path | What it is |
 |---|---|
-| `src/app/` | Pages (`/`, `/app`, `/docs`, `/ledger`, `/token`, local-only `/deploy`) and API routes (`facts`, `mcp`, `workspace`, `ledger`, `chain`, `rpc`). |
+| `src/app/` | Pages (`/`, `/app`, `/docs`, `/ledger`, `/token`) and API routes (`facts`, `mcp`, `workspace`, `ledger`, `chain`, `rpc`). |
 | `src/components/` | Interface components: home sections, the workspace app, the chain tab, the wallet dialog. |
 | `src/config/` | `brand.ts` (name, ticker, token address, links) and `contracts.ts` (deployed contract address). Every brand value is read from here. |
 | `src/lib/facts/` | The workspace rules (drafts, batch approval, grants, reads, receipts, hashing, Merkle roots), shared by the browser and the server. |
@@ -65,7 +65,7 @@ Open http://localhost:6820. The practice workspace, the docs and the live chain 
 
 | Contract | Address | Explorer |
 |---|---|---|
-| RexsonFactLedger (with internal library RexsonLedgerMath) | not deployed yet | — |
+| RexsonFactLedger (with internal library RexsonLedgerMath) | `0x1b9ecaaa58e28e2a9f3edd2175c649b844a232ce` | [Blockscout](https://robinhoodchain.blockscout.com/address/0x1b9ecaaa58e28e2a9f3edd2175c649b844a232ce) |
 
 Projects have an owner who names editors and reviewers. An editor proposes a fact version based on the current one; a reviewer approves up to 20 drafts in one transaction, all or none, and cannot approve their own draft unless the project allows solo approval. The owner issues, changes and revokes grants (assistant key hash, groups, level, expiry). `checkRead`, `checkPropose` and `checkApprove` return every refusal as a reason bit before anything is signed. Receipt batches are anchored as Merkle roots. Fact text never goes on chain. There is no global owner, no admin over anyone's project, no fee, no upgrade, and it holds no funds.
 
@@ -115,7 +115,7 @@ $REXSON is the community token of Rexson on Robinhood Chain. Contract address: a
 | `STORE_KEY_PREFIX` | Key prefix in a shared store | e.g. `rexson:` |
 
 3. Point your domain at it and check `/` (200), `/api/chain` (JSON with a block number) and `/llms.txt`.
-4. Contract: `RexsonFactLedger` takes no constructor arguments. Deploy it (the local-only `/deploy` page does it from a wallet), put the address, block and creation transaction into `src/config/contracts.ts`, then run `npm run verify-deployment`.
+4. Contract: `RexsonFactLedger` takes no constructor arguments. Deploy it from your own wallet (one creation transaction), put the address, block and creation transaction into `src/config/contracts.ts`, then run `npm run verify-deployment`.
 
 ## Contributing
 

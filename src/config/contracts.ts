@@ -1,19 +1,19 @@
 import { isAddress } from "@/config/brand";
 
 /*
- * Rexson's own contract on Robinhood Chain (chain 4663). Not deployed yet: the owner deploys it from the local-only /deploy page.
- * Once deployed, put the address, the deployment block and the creation transaction below and run
+ * Rexson's own contract on Robinhood Chain (chain 4663). Deployed 26 Nov 2026 by the owner.
+ * Address, deployment block and creation transaction below; check with
  * `npm run verify-deployment -- --ledger <address> --ledger-tx <tx>` (prints MATCH).
  *   ledger  RexsonFactLedger (+ internal library RexsonLedgerMath, inlined): projects with editors and reviewers, fact drafts and
  *           all-or-nothing batch approval of fact versions (content hashes only), grants per assistant key hash (groups, level,
  *           expiry), checkRead reason bits, receipt batches anchored as Merkle roots. No funds, no admin, no upgrade.
  */
 const DEPLOYED = {
-  ledger: "",
+  ledger: "0x1b9ecaaa58e28e2a9f3edd2175c649b844a232ce",
   /** Block of the deployment transaction (log scans start here). */
-  block: 0,
+  block: 123517540,
   /** Creation transaction. */
-  tx: "",
+  tx: "0x1980547e69f792e2f4146a51580c22db5c9516e836ea4d1bd830a9464d8881a8",
 };
 
 /**

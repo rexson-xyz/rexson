@@ -22,7 +22,7 @@ const SLUG = "rexson";
 const TICKER = "REXSON";
 const DOMAIN = "rexson.xyz";
 /** X account of the project (the owner's handle, exactly as written in the order). */
-const X_HANDLE = "rexson";
+const X_HANDLE = "rexsonxyz";
 
 export const BRAND = {
   name: NAME,
@@ -42,7 +42,7 @@ export const BRAND = {
   x: `https://x.com/${X_HANDLE}`,
   xHandle: `@${X_HANDLE}`,
   // Public source repository: none yet, so the link stays hidden.
-  github: "https://github.com/",
+  github: "https://github.com/rexson-xyz/rexson",
   ca: CA,
 } as const;
 
